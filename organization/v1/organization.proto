@@ -1,0 +1,158 @@
+syntax = "proto3";
+
+package organization.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service OrganizationService {
+  rpc CreateOrganization(CreateOrganizationRequest) returns (CreateOrganizationResponse);
+  rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse);
+  rpc ChangeOrganizationName(ChangeOrganizationNameRequest) returns (ChangeOrganizationNameResponse);
+  rpc TransferSuperadmin(TransferSuperadminRequest) returns (TransferSuperadminResponse);
+  rpc IssueInvitation(IssueInvitationRequest) returns (IssueInvitationResponse);
+  rpc ClaimInvitation(ClaimInvitationRequest) returns (ClaimInvitationResponse);
+  rpc RevokeInvitation(RevokeInvitationRequest) returns (RevokeInvitationResponse);
+  rpc ForceJoin(ForceJoinRequest) returns (ForceJoinResponse);
+  rpc MarkOrganization(MarkOrganizationRequest) returns (MarkOrganizationResponse);
+  rpc GetPlatformOrganization(GetPlatformOrganizationRequest) returns (GetPlatformOrganizationResponse);
+  rpc ProvePlatformship(ProvePlatformshipRequest) returns (ProvePlatformshipResponse);
+  rpc EvictMember(EvictMemberRequest) returns (EvictMemberResponse);
+  rpc Leave(LeaveRequest) returns (LeaveResponse);
+}
+
+message Organization {
+  string id = 1;
+  string name = 2;
+  string handle = 3;
+  repeated Membership memberships = 4;
+  repeated Invitation invitations = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message Membership {
+  string id = 1;
+  string account_id = 2;
+  bool is_superadmin = 3;
+  bool binding = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message Invitation {
+  string id = 1;
+  string invitee_account_id = 2;
+  bool binding = 3;
+  InvitationState state = 4;
+  string issued_by = 5;
+  google.protobuf.Timestamp expires_at = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+enum InvitationState {
+  INVITATION_STATE_UNSPECIFIED = 0;
+  INVITATION_STATE_ISSUED = 1;
+  INVITATION_STATE_CLAIMED = 2;
+  INVITATION_STATE_REVOKED = 3;
+}
+
+message CreateOrganizationRequest {
+  string name = 1;
+  string owner_account_id = 2;
+}
+
+message CreateOrganizationResponse {
+  Organization org = 1;
+}
+
+message GetOrganizationRequest {
+  string organization_id = 1;
+}
+
+message GetOrganizationResponse {
+  Organization org = 1;
+}
+
+message ChangeOrganizationNameRequest {
+  string organization_id = 1;
+  string name = 2;
+}
+
+message ChangeOrganizationNameResponse {}
+
+message TransferSuperadminRequest {
+  string organization_id = 1;
+  string from_membership_id = 2;
+  string to_membership_id = 3;
+}
+
+message TransferSuperadminResponse {}
+
+message IssueInvitationRequest {
+  string organization_id = 1;
+  string invitee_account_id = 2;
+  bool binding = 3;
+}
+
+message IssueInvitationResponse {
+  string invitation_id = 1;
+}
+
+message ClaimInvitationRequest {
+  string claimant_account_id = 1;
+  string organization_id = 2;
+  string invitation_id = 3;
+}
+
+message ClaimInvitationResponse {}
+
+message RevokeInvitationRequest {
+  string organization_id = 1;
+  string invitation_id = 2;
+}
+
+message RevokeInvitationResponse {}
+
+message ForceJoinRequest {
+  string account_id = 1;
+  string organization_id = 2;
+}
+
+message ForceJoinResponse {
+  string membership_id = 1;
+}
+
+message MarkOrganizationRequest {
+  string organization_id = 1;
+}
+
+message MarkOrganizationResponse {}
+
+message GetPlatformOrganizationRequest {}
+
+message GetPlatformOrganizationResponse {
+  Organization org = 1;
+}
+
+message ProvePlatformshipRequest {
+  string account_id = 1;
+}
+
+message ProvePlatformshipResponse {
+  string membership_id = 1;
+}
+
+message EvictMemberRequest {
+  string organization_id = 1;
+  string membership_id = 2;
+}
+
+message EvictMemberResponse {}
+
+message LeaveRequest {
+  string account_id = 1;
+  string organization_id = 2;
+}
+
+message LeaveResponse {}

@@ -1,0 +1,8 @@
+# Rust
+gen/rust/target/
+gen/rust/Cargo.lock
+
+# Node
+gen/ts/node_modules/
+
+# Go

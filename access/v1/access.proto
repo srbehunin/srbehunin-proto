@@ -5,32 +5,40 @@ package access.v1;
 import "google/protobuf/timestamp.proto";
 
 service AccountService {
+  // Creates a user account and issues a live session for them.
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  // Take an identifier (email OR username!) and attempt to log in, and create
+  // a session if necessary.
   rpc VerifyPassword(VerifyPasswordRequest) returns (VerifyPasswordResponse);
+  // Take a session id (functionally a token) and log out.
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+  // Take a session id (functionally a token) and check if the session is
+  // still live.
   rpc ValidateSession(ValidateSessionRequest) returns (ValidateSessionResponse);
+  // Read an account.
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
+  // Add a credential to an account.
+  rpc AddCredential(AddCredentialRequest) returns (AddCredentialResponse);
+  // Opposite of AddCredential.
+  rpc RemoveCredential(RemoveCredentialRequest) returns (RemoveCredentialResponse);
+  // Change the name of the account.
+  rpc ChangeName(ChangeNameRequest) returns (ChangeNameResponse);
+  // Request a password reset for a specified email address. Only works for
+  // classically credentialed individuals.
+  rpc RequestPasswordReset(RequestPasswordResetRequest) returns (RequestPasswordResetResponse);
+  // Submit the reset token and a new password and bingo!
+  rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
+  // Force logout a user.
+  rpc ForceLogout(ForceLogoutRequest) returns (ForceLogoutResponse);
+  // Force reset the password of an account.
+  rpc ForceResetPassword(ForceResetPasswordRequest) returns (ForceResetPasswordResponse);
+  // Block an account.
+  rpc LockAccount(LockAccountRequest) returns (LockAccountResponse);
+  // Unblock an account!
+  rpc UnlockAccount(UnlockAccountRequest) returns (UnlockAccountResponse);
 }
 
-message CreateAccountRequest {
-  string name = 1;
-  string username = 2;
-  repeated Pronoun pronouns = 3;
-  oneof credential {
-    ClassicCredentialCreation classic = 4;
-  }
-}
-
-message Pronoun {
-  string subject = 1;
-  string object = 2;
-  string possessive = 3;
-}
-
-message ClassicCredentialCreation {
-  string email = 1;
-  string password = 2;
-}
-
-message CreateAccountResponse {
+message Session {
   string id = 1;
   string account_id = 2;
   google.protobuf.Timestamp issued_at = 3;
@@ -46,16 +54,132 @@ enum SessionStatus {
   SESSION_STATUS_EXPIRED = 3;
 }
 
+message Pronoun {
+  string subject = 1;
+  string object = 2;
+  string possessive = 3;
+}
+
+message ClassicCredentialCreation {
+  string email = 1;
+  string password = 2;
+}
+
+message Account {
+  string id = 1;
+  string name = 2;
+  string username = 3;
+  repeated Pronoun pronouns = 4;
+  repeated Credential credentials = 5;
+  google.protobuf.Timestamp locked_at = 6;
+}
+
+message Credential {
+  string id = 1;
+  string email = 2;
+}
+
+message CreateAccountRequest {
+  string name = 1;
+  string username = 2;
+  repeated Pronoun pronouns = 3;
+  oneof credential {
+    ClassicCredentialCreation classic = 4;
+  }
+}
+
+message CreateAccountResponse {
+  Session session = 1;
+}
+
 message VerifyPasswordRequest {
   string identifier = 1;
   string password = 2;
 }
 
 message VerifyPasswordResponse {
-  string id = 1;
-  string account_id = 2;
-  google.protobuf.Timestamp issued_at = 3;
-  google.protobuf.Timestamp expires_at = 4;
-  google.protobuf.Timestamp updated_at = 5;
-  SessionStatus status = 6;
+  Session session = 1;
 }
+
+message LogoutRequest {
+  string session_id = 1;
+}
+
+message LogoutResponse {}
+
+message ValidateSessionRequest {
+  string session_id = 1;
+}
+
+message ValidateSessionResponse {
+  Session session = 1;
+}
+
+message GetAccountRequest {
+  string account_id = 1;
+}
+
+message GetAccountResponse {
+  Account account = 1;
+}
+
+message AddCredentialRequest {
+  string account_id = 1;
+  oneof credential {
+    ClassicCredentialCreation classic = 2;
+  }
+}
+
+message AddCredentialResponse {}
+
+message RemoveCredentialRequest {
+  string account_id = 1;
+  string credential_id = 2;
+}
+
+message RemoveCredentialResponse {}
+
+message ChangeNameRequest {
+  string account_id = 1;
+  string name = 2;
+}
+
+message ChangeNameResponse {}
+
+message RequestPasswordResetRequest {
+  string email = 1;
+}
+
+message RequestPasswordResetResponse {}
+
+message ResetPasswordRequest {
+  string token = 1;
+  string new_password = 2;
+}
+
+message ResetPasswordResponse {}
+
+message ForceLogoutRequest {
+  string account_id = 1;
+}
+
+message ForceLogoutResponse {}
+
+message ForceResetPasswordRequest {
+  string account_id = 1;
+  string new_password = 2;
+}
+
+message ForceResetPasswordResponse {}
+
+message LockAccountRequest {
+  string account_id = 1;
+}
+
+message LockAccountResponse {}
+
+message UnlockAccountRequest {
+  string account_id = 1;
+}
+
+message UnlockAccountResponse {}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package entitlement.v1;
+
+service EntitlementService {
+  // Enroll an organization in an app. The app's status decides which claim is
+  // required: open enrollment requires ManageEnrollment, invite-only requires
+  // ForceEnroll, and platform-only/deactivated apps cannot be enrolled.
+  rpc Enroll(EnrollRequest) returns (EnrollResponse);
+  // Unenroll an organization from an app. Requires ManageEnrollment.
+  rpc Unenroll(UnenrollRequest) returns (UnenrollResponse);
+  // Prove that an organization is enrolled in an app. Fails if not enrolled.
+  rpc ProveAccess(ProveAccessRequest) returns (ProveAccessResponse);
+}
+
+message EnrollRequest {
+  string organization_id = 1;
+  string app_id = 2;
+}
+
+message EnrollResponse {
+  // True if this call resulted in a change. No-ops do not error.
+  bool enrolled = 1;
+}
+
+message UnenrollRequest {
+  string organization_id = 1;
+  string app_id = 2;
+}
+
+message UnenrollResponse {
+  // True if this call resulted in a change. No-ops do not error.
+  bool removed = 1;
+}
+
+message ProveAccessRequest {
+  string organization_id = 1;
+  string app_id = 2;
+}
+
+message ProveAccessResponse {}

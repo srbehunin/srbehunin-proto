@@ -1,0 +1,46 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: github.com/sophloaf2019/srbehunin-proto/gen/go
+plugins:
+  # Rust: protobuf messages (buffa) + mod.rs module tree
+  - local: protoc-gen-buffa
+    out: gen/rust/buffa
+    opt:
+      - views=true
+      - json=true
+  - local: protoc-gen-buffa-packaging
+    out: gen/rust/buffa
+    strategy: all
+  # Rust: Connect service stubs (client + server) + services-only module tree
+  - local: protoc-gen-connect-rust
+    out: gen/rust/connect
+    opt:
+      - buffa_module=crate::proto
+  - local: protoc-gen-buffa-packaging
+    out: gen/rust/connect
+    strategy: all
+    opt:
+      - filter=services
+  # Go: protobuf messages + Connect client
+  - local: protoc-gen-go
+    out: gen/go
+    opt:
+      - paths=source_relative
+  - local: protoc-gen-connect-go
+    out: gen/go
+    opt:
+      - paths=source_relative
+  # TypeScript: protobuf messages + Connect client
+  - local: protoc-gen-es
+    out: gen/ts
+    opt:
+      - target=ts
+      - import_extension=ts
+  - local: protoc-gen-connect-es
+    out: gen/ts
+    opt:
+      - target=ts
+      - import_extension=ts

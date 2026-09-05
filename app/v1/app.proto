@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package app.v1;
+
+service AppService {
+  rpc CreateApp(CreateAppRequest) returns (CreateAppResponse);
+  rpc UpdateApp(UpdateAppRequest) returns (UpdateAppResponse);
+  rpc GetAppById(GetAppByIdRequest) returns (GetAppByIdResponse);
+  rpc GetAppByHandle(GetAppByHandleRequest) returns (GetAppByHandleResponse);
+  rpc SetAppStatus(SetAppStatusRequest) returns (SetAppStatusResponse);
+  rpc GetAll(GetAllRequest) returns (GetAllResponse);
+}
+
+message App {
+  string id = 1;
+  string name = 2; // e.g. "Linens"
+  string handle = 3;
+  string color = 4; // e.g. "#123456"
+  AppStatus status = 5;
+}
+
+enum AppStatus {
+  APP_STATUS_UNSPECIFIED = 0;
+  // Anyone can enroll.
+  APP_STATUS_OPEN_ENROLLMENT = 1;
+  // Only platform admins can force-enroll customers.
+  APP_STATUS_INVITE_ONLY = 2;
+  // Only platform admins can use it and customers don't even know it exists.
+  APP_STATUS_PLATFORM_ONLY = 3;
+  // No one can use it.
+  APP_STATUS_DEACTIVATED = 4;
+}
+
+message CreateAppRequest {
+  string name = 1;
+  string color = 2;
+}
+
+message CreateAppResponse {
+  App app = 1;
+}
+
+message UpdateAppRequest {
+  string app_id = 1;
+  optional string new_name = 2;
+  optional string new_color = 3;
+}
+
+message UpdateAppResponse {}
+
+message GetAppByIdRequest {
+  string app_id = 1;
+}
+
+message GetAppByIdResponse {
+  App app = 1;
+}
+
+message GetAppByHandleRequest {
+  string handle = 1;
+}
+
+message GetAppByHandleResponse {
+  App app = 1;
+}
+
+message SetAppStatusRequest {
+  string app_id = 1;
+  AppStatus status = 2;
+}
+
+message SetAppStatusResponse {}
+
+message GetAllRequest {}
+
+message GetAllResponse {
+  repeated App apps = 1;
+}
