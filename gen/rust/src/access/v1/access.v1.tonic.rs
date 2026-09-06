@@ -6,10 +6,10 @@ pub mod account_service_client {
         dead_code,
         missing_docs,
         clippy::wildcard_imports,
-        clippy::let_unit_value,
+        clippy::let_unit_value
     )]
-    use tonic::codegen::*;
     use tonic::codegen::http::Uri;
+    use tonic::codegen::*;
     #[derive(Debug, Clone)]
     pub struct AccountServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -48,14 +48,13 @@ pub mod account_service_client {
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
             T: tonic::codegen::Service<
-                http::Request<tonic::body::Body>,
-                Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::Body>>::ResponseBody,
+                    http::Request<tonic::body::Body>,
+                    Response = http::Response<
+                        <T as tonic::client::GrpcService<tonic::body::Body>>::ResponseBody,
+                    >,
                 >,
-            >,
-            <T as tonic::codegen::Service<
-                http::Request<tonic::body::Body>,
-            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
+            <T as tonic::codegen::Service<http::Request<tonic::body::Body>>>::Error:
+                Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             AccountServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -93,22 +92,14 @@ pub mod account_service_client {
         pub async fn create_account(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateAccountRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::CreateAccountResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::CreateAccountResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/CreateAccount",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/CreateAccount");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "CreateAccount"));
@@ -117,43 +108,30 @@ pub mod account_service_client {
         pub async fn verify_password(
             &mut self,
             request: impl tonic::IntoRequest<super::VerifyPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::VerifyPasswordResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::VerifyPasswordResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/VerifyPassword",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/VerifyPassword");
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("access.v1.AccountService", "VerifyPassword"));
+            req.extensions_mut().insert(GrpcMethod::new(
+                "access.v1.AccountService",
+                "VerifyPassword",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn logout(
             &mut self,
             request: impl tonic::IntoRequest<super::LogoutRequest>,
         ) -> std::result::Result<tonic::Response<super::LogoutResponse>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/Logout",
-            );
+            let path = http::uri::PathAndQuery::from_static("/access.v1.AccountService/Logout");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "Logout"));
@@ -162,46 +140,31 @@ pub mod account_service_client {
         pub async fn validate_session(
             &mut self,
             request: impl tonic::IntoRequest<super::ValidateSessionRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ValidateSessionResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ValidateSessionResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/ValidateSession",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/ValidateSession");
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("access.v1.AccountService", "ValidateSession"));
+            req.extensions_mut().insert(GrpcMethod::new(
+                "access.v1.AccountService",
+                "ValidateSession",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn get_account(
             &mut self,
             request: impl tonic::IntoRequest<super::GetAccountRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetAccountResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::GetAccountResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/GetAccount",
-            );
+            let path = http::uri::PathAndQuery::from_static("/access.v1.AccountService/GetAccount");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "GetAccount"));
@@ -210,22 +173,14 @@ pub mod account_service_client {
         pub async fn add_credential(
             &mut self,
             request: impl tonic::IntoRequest<super::AddCredentialRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::AddCredentialResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::AddCredentialResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/AddCredential",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/AddCredential");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "AddCredential"));
@@ -234,46 +189,31 @@ pub mod account_service_client {
         pub async fn remove_credential(
             &mut self,
             request: impl tonic::IntoRequest<super::RemoveCredentialRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RemoveCredentialResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::RemoveCredentialResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/RemoveCredential",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/RemoveCredential");
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("access.v1.AccountService", "RemoveCredential"));
+            req.extensions_mut().insert(GrpcMethod::new(
+                "access.v1.AccountService",
+                "RemoveCredential",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn change_name(
             &mut self,
             request: impl tonic::IntoRequest<super::ChangeNameRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ChangeNameResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ChangeNameResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/ChangeName",
-            );
+            let path = http::uri::PathAndQuery::from_static("/access.v1.AccountService/ChangeName");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "ChangeName"));
@@ -282,48 +222,33 @@ pub mod account_service_client {
         pub async fn request_password_reset(
             &mut self,
             request: impl tonic::IntoRequest<super::RequestPasswordResetRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RequestPasswordResetResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::RequestPasswordResetResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/access.v1.AccountService/RequestPasswordReset",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("access.v1.AccountService", "RequestPasswordReset"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "access.v1.AccountService",
+                "RequestPasswordReset",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn reset_password(
             &mut self,
             request: impl tonic::IntoRequest<super::ResetPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ResetPasswordResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ResetPasswordResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/ResetPassword",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/ResetPassword");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "ResetPassword"));
@@ -332,22 +257,14 @@ pub mod account_service_client {
         pub async fn force_logout(
             &mut self,
             request: impl tonic::IntoRequest<super::ForceLogoutRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ForceLogoutResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ForceLogoutResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/ForceLogout",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/ForceLogout");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "ForceLogout"));
@@ -356,48 +273,33 @@ pub mod account_service_client {
         pub async fn force_reset_password(
             &mut self,
             request: impl tonic::IntoRequest<super::ForceResetPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ForceResetPasswordResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ForceResetPasswordResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/access.v1.AccountService/ForceResetPassword",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("access.v1.AccountService", "ForceResetPassword"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "access.v1.AccountService",
+                "ForceResetPassword",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn lock_account(
             &mut self,
             request: impl tonic::IntoRequest<super::LockAccountRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::LockAccountResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::LockAccountResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/LockAccount",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/LockAccount");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "LockAccount"));
@@ -406,22 +308,14 @@ pub mod account_service_client {
         pub async fn unlock_account(
             &mut self,
             request: impl tonic::IntoRequest<super::UnlockAccountRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UnlockAccountResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::UnlockAccountResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/access.v1.AccountService/UnlockAccount",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/access.v1.AccountService/UnlockAccount");
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("access.v1.AccountService", "UnlockAccount"));
@@ -436,26 +330,20 @@ pub mod account_service_server {
         dead_code,
         missing_docs,
         clippy::wildcard_imports,
-        clippy::let_unit_value,
+        clippy::let_unit_value
     )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AccountServiceServer.
-    #[async_trait]
+
     pub trait AccountService: std::marker::Send + std::marker::Sync + 'static {
         async fn create_account(
             &self,
             request: tonic::Request<super::CreateAccountRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::CreateAccountResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::CreateAccountResponse>, tonic::Status>;
         async fn verify_password(
             &self,
             request: tonic::Request<super::VerifyPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::VerifyPasswordResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::VerifyPasswordResponse>, tonic::Status>;
         async fn logout(
             &self,
             request: tonic::Request<super::LogoutRequest>,
@@ -463,80 +351,47 @@ pub mod account_service_server {
         async fn validate_session(
             &self,
             request: tonic::Request<super::ValidateSessionRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ValidateSessionResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::ValidateSessionResponse>, tonic::Status>;
         async fn get_account(
             &self,
             request: tonic::Request<super::GetAccountRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetAccountResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::GetAccountResponse>, tonic::Status>;
         async fn add_credential(
             &self,
             request: tonic::Request<super::AddCredentialRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::AddCredentialResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::AddCredentialResponse>, tonic::Status>;
         async fn remove_credential(
             &self,
             request: tonic::Request<super::RemoveCredentialRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RemoveCredentialResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::RemoveCredentialResponse>, tonic::Status>;
         async fn change_name(
             &self,
             request: tonic::Request<super::ChangeNameRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ChangeNameResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::ChangeNameResponse>, tonic::Status>;
         async fn request_password_reset(
             &self,
             request: tonic::Request<super::RequestPasswordResetRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RequestPasswordResetResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::RequestPasswordResetResponse>, tonic::Status>;
         async fn reset_password(
             &self,
             request: tonic::Request<super::ResetPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ResetPasswordResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::ResetPasswordResponse>, tonic::Status>;
         async fn force_logout(
             &self,
             request: tonic::Request<super::ForceLogoutRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ForceLogoutResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::ForceLogoutResponse>, tonic::Status>;
         async fn force_reset_password(
             &self,
             request: tonic::Request<super::ForceResetPasswordRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ForceResetPasswordResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::ForceResetPasswordResponse>, tonic::Status>;
         async fn lock_account(
             &self,
             request: tonic::Request<super::LockAccountRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::LockAccountResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::LockAccountResponse>, tonic::Status>;
         async fn unlock_account(
             &self,
             request: tonic::Request<super::UnlockAccountRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UnlockAccountResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::UnlockAccountResponse>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct AccountServiceServer<T> {
@@ -559,10 +414,7 @@ pub mod account_service_server {
                 max_encoding_message_size: None,
             }
         }
-        pub fn with_interceptor<F>(
-            inner: T,
-            interceptor: F,
-        ) -> InterceptedService<Self, F>
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
         where
             F: tonic::service::Interceptor,
         {
@@ -617,15 +469,11 @@ pub mod account_service_server {
                 "/access.v1.AccountService/CreateAccount" => {
                     #[allow(non_camel_case_types)]
                     struct CreateAccountSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::CreateAccountRequest>
-                    for CreateAccountSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::CreateAccountRequest>
+                        for CreateAccountSvc<T>
+                    {
                         type Response = super::CreateAccountResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::CreateAccountRequest>,
@@ -662,23 +510,19 @@ pub mod account_service_server {
                 "/access.v1.AccountService/VerifyPassword" => {
                     #[allow(non_camel_case_types)]
                     struct VerifyPasswordSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::VerifyPasswordRequest>
-                    for VerifyPasswordSvc<T> {
+                    impl<T: AccountService>
+                        tonic::server::UnaryService<super::VerifyPasswordRequest>
+                        for VerifyPasswordSvc<T>
+                    {
                         type Response = super::VerifyPasswordResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::VerifyPasswordRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as AccountService>::verify_password(&inner, request)
-                                    .await
+                                <T as AccountService>::verify_password(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -708,23 +552,16 @@ pub mod account_service_server {
                 "/access.v1.AccountService/Logout" => {
                     #[allow(non_camel_case_types)]
                     struct LogoutSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::LogoutRequest>
-                    for LogoutSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::LogoutRequest> for LogoutSvc<T> {
                         type Response = super::LogoutResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::LogoutRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as AccountService>::logout(&inner, request).await
-                            };
+                            let fut =
+                                async move { <T as AccountService>::logout(&inner, request).await };
                             Box::pin(fut)
                         }
                     }
@@ -753,23 +590,19 @@ pub mod account_service_server {
                 "/access.v1.AccountService/ValidateSession" => {
                     #[allow(non_camel_case_types)]
                     struct ValidateSessionSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::ValidateSessionRequest>
-                    for ValidateSessionSvc<T> {
+                    impl<T: AccountService>
+                        tonic::server::UnaryService<super::ValidateSessionRequest>
+                        for ValidateSessionSvc<T>
+                    {
                         type Response = super::ValidateSessionResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ValidateSessionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as AccountService>::validate_session(&inner, request)
-                                    .await
+                                <T as AccountService>::validate_session(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -799,15 +632,9 @@ pub mod account_service_server {
                 "/access.v1.AccountService/GetAccount" => {
                     #[allow(non_camel_case_types)]
                     struct GetAccountSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::GetAccountRequest>
-                    for GetAccountSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::GetAccountRequest> for GetAccountSvc<T> {
                         type Response = super::GetAccountResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::GetAccountRequest>,
@@ -844,15 +671,11 @@ pub mod account_service_server {
                 "/access.v1.AccountService/AddCredential" => {
                     #[allow(non_camel_case_types)]
                     struct AddCredentialSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::AddCredentialRequest>
-                    for AddCredentialSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::AddCredentialRequest>
+                        for AddCredentialSvc<T>
+                    {
                         type Response = super::AddCredentialResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::AddCredentialRequest>,
@@ -889,23 +712,19 @@ pub mod account_service_server {
                 "/access.v1.AccountService/RemoveCredential" => {
                     #[allow(non_camel_case_types)]
                     struct RemoveCredentialSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::RemoveCredentialRequest>
-                    for RemoveCredentialSvc<T> {
+                    impl<T: AccountService>
+                        tonic::server::UnaryService<super::RemoveCredentialRequest>
+                        for RemoveCredentialSvc<T>
+                    {
                         type Response = super::RemoveCredentialResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::RemoveCredentialRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as AccountService>::remove_credential(&inner, request)
-                                    .await
+                                <T as AccountService>::remove_credential(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -935,15 +754,9 @@ pub mod account_service_server {
                 "/access.v1.AccountService/ChangeName" => {
                     #[allow(non_camel_case_types)]
                     struct ChangeNameSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::ChangeNameRequest>
-                    for ChangeNameSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::ChangeNameRequest> for ChangeNameSvc<T> {
                         type Response = super::ChangeNameResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ChangeNameRequest>,
@@ -980,26 +793,19 @@ pub mod account_service_server {
                 "/access.v1.AccountService/RequestPasswordReset" => {
                     #[allow(non_camel_case_types)]
                     struct RequestPasswordResetSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::RequestPasswordResetRequest>
-                    for RequestPasswordResetSvc<T> {
+                    impl<T: AccountService>
+                        tonic::server::UnaryService<super::RequestPasswordResetRequest>
+                        for RequestPasswordResetSvc<T>
+                    {
                         type Response = super::RequestPasswordResetResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::RequestPasswordResetRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as AccountService>::request_password_reset(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
+                                <T as AccountService>::request_password_reset(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1029,15 +835,11 @@ pub mod account_service_server {
                 "/access.v1.AccountService/ResetPassword" => {
                     #[allow(non_camel_case_types)]
                     struct ResetPasswordSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::ResetPasswordRequest>
-                    for ResetPasswordSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::ResetPasswordRequest>
+                        for ResetPasswordSvc<T>
+                    {
                         type Response = super::ResetPasswordResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ResetPasswordRequest>,
@@ -1074,15 +876,11 @@ pub mod account_service_server {
                 "/access.v1.AccountService/ForceLogout" => {
                     #[allow(non_camel_case_types)]
                     struct ForceLogoutSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::ForceLogoutRequest>
-                    for ForceLogoutSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::ForceLogoutRequest>
+                        for ForceLogoutSvc<T>
+                    {
                         type Response = super::ForceLogoutResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ForceLogoutRequest>,
@@ -1119,23 +917,19 @@ pub mod account_service_server {
                 "/access.v1.AccountService/ForceResetPassword" => {
                     #[allow(non_camel_case_types)]
                     struct ForceResetPasswordSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::ForceResetPasswordRequest>
-                    for ForceResetPasswordSvc<T> {
+                    impl<T: AccountService>
+                        tonic::server::UnaryService<super::ForceResetPasswordRequest>
+                        for ForceResetPasswordSvc<T>
+                    {
                         type Response = super::ForceResetPasswordResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ForceResetPasswordRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as AccountService>::force_reset_password(&inner, request)
-                                    .await
+                                <T as AccountService>::force_reset_password(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1165,15 +959,11 @@ pub mod account_service_server {
                 "/access.v1.AccountService/LockAccount" => {
                     #[allow(non_camel_case_types)]
                     struct LockAccountSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::LockAccountRequest>
-                    for LockAccountSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::LockAccountRequest>
+                        for LockAccountSvc<T>
+                    {
                         type Response = super::LockAccountResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::LockAccountRequest>,
@@ -1210,15 +1000,11 @@ pub mod account_service_server {
                 "/access.v1.AccountService/UnlockAccount" => {
                     #[allow(non_camel_case_types)]
                     struct UnlockAccountSvc<T: AccountService>(pub Arc<T>);
-                    impl<
-                        T: AccountService,
-                    > tonic::server::UnaryService<super::UnlockAccountRequest>
-                    for UnlockAccountSvc<T> {
+                    impl<T: AccountService> tonic::server::UnaryService<super::UnlockAccountRequest>
+                        for UnlockAccountSvc<T>
+                    {
                         type Response = super::UnlockAccountResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::UnlockAccountRequest>,
@@ -1252,25 +1038,19 @@ pub mod account_service_server {
                     };
                     Box::pin(fut)
                 }
-                _ => {
-                    Box::pin(async move {
-                        let mut response = http::Response::new(
-                            tonic::body::Body::default(),
-                        );
-                        let headers = response.headers_mut();
-                        headers
-                            .insert(
-                                tonic::Status::GRPC_STATUS,
-                                (tonic::Code::Unimplemented as i32).into(),
-                            );
-                        headers
-                            .insert(
-                                http::header::CONTENT_TYPE,
-                                tonic::metadata::GRPC_CONTENT_TYPE,
-                            );
-                        Ok(response)
-                    })
-                }
+                _ => Box::pin(async move {
+                    let mut response = http::Response::new(tonic::body::Body::default());
+                    let headers = response.headers_mut();
+                    headers.insert(
+                        tonic::Status::GRPC_STATUS,
+                        (tonic::Code::Unimplemented as i32).into(),
+                    );
+                    headers.insert(
+                        http::header::CONTENT_TYPE,
+                        tonic::metadata::GRPC_CONTENT_TYPE,
+                    );
+                    Ok(response)
+                }),
             }
         }
     }

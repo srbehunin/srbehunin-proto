@@ -6,10 +6,10 @@ pub mod organization_service_client {
         dead_code,
         missing_docs,
         clippy::wildcard_imports,
-        clippy::let_unit_value,
+        clippy::let_unit_value
     )]
-    use tonic::codegen::*;
     use tonic::codegen::http::Uri;
+    use tonic::codegen::*;
     #[derive(Debug, Clone)]
     pub struct OrganizationServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -48,14 +48,13 @@ pub mod organization_service_client {
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
             T: tonic::codegen::Service<
-                http::Request<tonic::body::Body>,
-                Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::Body>>::ResponseBody,
+                    http::Request<tonic::body::Body>,
+                    Response = http::Response<
+                        <T as tonic::client::GrpcService<tonic::body::Body>>::ResponseBody,
+                    >,
                 >,
-            >,
-            <T as tonic::codegen::Service<
-                http::Request<tonic::body::Body>,
-            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
+            <T as tonic::codegen::Service<http::Request<tonic::body::Body>>>::Error:
+                Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             OrganizationServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -93,59 +92,39 @@ pub mod organization_service_client {
         pub async fn create_organization(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateOrganizationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::CreateOrganizationResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::CreateOrganizationResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/CreateOrganization",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "CreateOrganization",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "CreateOrganization",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn get_organization(
             &mut self,
             request: impl tonic::IntoRequest<super::GetOrganizationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetOrganizationResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::GetOrganizationResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/GetOrganization",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "GetOrganization",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "GetOrganization",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn change_organization_name(
@@ -155,197 +134,131 @@ pub mod organization_service_client {
             tonic::Response<super::ChangeOrganizationNameResponse>,
             tonic::Status,
         > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/ChangeOrganizationName",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "ChangeOrganizationName",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "ChangeOrganizationName",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn transfer_superadmin(
             &mut self,
             request: impl tonic::IntoRequest<super::TransferSuperadminRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::TransferSuperadminResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::TransferSuperadminResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/TransferSuperadmin",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "TransferSuperadmin",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "TransferSuperadmin",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn issue_invitation(
             &mut self,
             request: impl tonic::IntoRequest<super::IssueInvitationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::IssueInvitationResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::IssueInvitationResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/IssueInvitation",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "IssueInvitation",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "IssueInvitation",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn claim_invitation(
             &mut self,
             request: impl tonic::IntoRequest<super::ClaimInvitationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ClaimInvitationResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ClaimInvitationResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/ClaimInvitation",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "ClaimInvitation",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "ClaimInvitation",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn revoke_invitation(
             &mut self,
             request: impl tonic::IntoRequest<super::RevokeInvitationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RevokeInvitationResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::RevokeInvitationResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/RevokeInvitation",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "RevokeInvitation",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "RevokeInvitation",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn force_join(
             &mut self,
             request: impl tonic::IntoRequest<super::ForceJoinRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ForceJoinResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ForceJoinResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/ForceJoin",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("organization.v1.OrganizationService", "ForceJoin"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "ForceJoin",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn mark_organization(
             &mut self,
             request: impl tonic::IntoRequest<super::MarkOrganizationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MarkOrganizationResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::MarkOrganizationResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/MarkOrganization",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "MarkOrganization",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "MarkOrganization",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn get_platform_organization(
@@ -355,102 +268,73 @@ pub mod organization_service_client {
             tonic::Response<super::GetPlatformOrganizationResponse>,
             tonic::Status,
         > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/GetPlatformOrganization",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "GetPlatformOrganization",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "GetPlatformOrganization",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn prove_platformship(
             &mut self,
             request: impl tonic::IntoRequest<super::ProvePlatformshipRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ProvePlatformshipResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ProvePlatformshipResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/ProvePlatformship",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "organization.v1.OrganizationService",
-                        "ProvePlatformship",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "ProvePlatformship",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn evict_member(
             &mut self,
             request: impl tonic::IntoRequest<super::EvictMemberRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::EvictMemberResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::EvictMemberResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/organization.v1.OrganizationService/EvictMember",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("organization.v1.OrganizationService", "EvictMember"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "EvictMember",
+            ));
             self.inner.unary(req, path, codec).await
         }
         pub async fn leave(
             &mut self,
             request: impl tonic::IntoRequest<super::LeaveRequest>,
         ) -> std::result::Result<tonic::Response<super::LeaveResponse>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/organization.v1.OrganizationService/Leave",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/organization.v1.OrganizationService/Leave");
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("organization.v1.OrganizationService", "Leave"));
+            req.extensions_mut().insert(GrpcMethod::new(
+                "organization.v1.OrganizationService",
+                "Leave",
+            ));
             self.inner.unary(req, path, codec).await
         }
     }
@@ -462,26 +346,20 @@ pub mod organization_service_server {
         dead_code,
         missing_docs,
         clippy::wildcard_imports,
-        clippy::let_unit_value,
+        clippy::let_unit_value
     )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with OrganizationServiceServer.
-    #[async_trait]
+
     pub trait OrganizationService: std::marker::Send + std::marker::Sync + 'static {
         async fn create_organization(
             &self,
             request: tonic::Request<super::CreateOrganizationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::CreateOrganizationResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::CreateOrganizationResponse>, tonic::Status>;
         async fn get_organization(
             &self,
             request: tonic::Request<super::GetOrganizationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetOrganizationResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::GetOrganizationResponse>, tonic::Status>;
         async fn change_organization_name(
             &self,
             request: tonic::Request<super::ChangeOrganizationNameRequest>,
@@ -492,45 +370,27 @@ pub mod organization_service_server {
         async fn transfer_superadmin(
             &self,
             request: tonic::Request<super::TransferSuperadminRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::TransferSuperadminResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::TransferSuperadminResponse>, tonic::Status>;
         async fn issue_invitation(
             &self,
             request: tonic::Request<super::IssueInvitationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::IssueInvitationResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::IssueInvitationResponse>, tonic::Status>;
         async fn claim_invitation(
             &self,
             request: tonic::Request<super::ClaimInvitationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ClaimInvitationResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::ClaimInvitationResponse>, tonic::Status>;
         async fn revoke_invitation(
             &self,
             request: tonic::Request<super::RevokeInvitationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RevokeInvitationResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::RevokeInvitationResponse>, tonic::Status>;
         async fn force_join(
             &self,
             request: tonic::Request<super::ForceJoinRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ForceJoinResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::ForceJoinResponse>, tonic::Status>;
         async fn mark_organization(
             &self,
             request: tonic::Request<super::MarkOrganizationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MarkOrganizationResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::MarkOrganizationResponse>, tonic::Status>;
         async fn get_platform_organization(
             &self,
             request: tonic::Request<super::GetPlatformOrganizationRequest>,
@@ -541,17 +401,11 @@ pub mod organization_service_server {
         async fn prove_platformship(
             &self,
             request: tonic::Request<super::ProvePlatformshipRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ProvePlatformshipResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::ProvePlatformshipResponse>, tonic::Status>;
         async fn evict_member(
             &self,
             request: tonic::Request<super::EvictMemberRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::EvictMemberResponse>,
-            tonic::Status,
-        >;
+        ) -> std::result::Result<tonic::Response<super::EvictMemberResponse>, tonic::Status>;
         async fn leave(
             &self,
             request: tonic::Request<super::LeaveRequest>,
@@ -578,10 +432,7 @@ pub mod organization_service_server {
                 max_encoding_message_size: None,
             }
         }
-        pub fn with_interceptor<F>(
-            inner: T,
-            interceptor: F,
-        ) -> InterceptedService<Self, F>
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
         where
             F: tonic::service::Interceptor,
         {
@@ -636,25 +487,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/CreateOrganization" => {
                     #[allow(non_camel_case_types)]
                     struct CreateOrganizationSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::CreateOrganizationRequest>
-                    for CreateOrganizationSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::CreateOrganizationRequest>
+                        for CreateOrganizationSvc<T>
+                    {
                         type Response = super::CreateOrganizationResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::CreateOrganizationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::create_organization(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as OrganizationService>::create_organization(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -685,26 +530,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/GetOrganization" => {
                     #[allow(non_camel_case_types)]
                     struct GetOrganizationSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::GetOrganizationRequest>
-                    for GetOrganizationSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::GetOrganizationRequest>
+                        for GetOrganizationSvc<T>
+                    {
                         type Response = super::GetOrganizationResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::GetOrganizationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::get_organization(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
+                                <T as OrganizationService>::get_organization(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -734,15 +572,12 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/ChangeOrganizationName" => {
                     #[allow(non_camel_case_types)]
                     struct ChangeOrganizationNameSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::ChangeOrganizationNameRequest>
-                    for ChangeOrganizationNameSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::ChangeOrganizationNameRequest>
+                        for ChangeOrganizationNameSvc<T>
+                    {
                         type Response = super::ChangeOrganizationNameResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ChangeOrganizationNameRequest>,
@@ -750,10 +585,9 @@ pub mod organization_service_server {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
                                 <T as OrganizationService>::change_organization_name(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
+                                    &inner, request,
+                                )
+                                .await
                             };
                             Box::pin(fut)
                         }
@@ -783,25 +617,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/TransferSuperadmin" => {
                     #[allow(non_camel_case_types)]
                     struct TransferSuperadminSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::TransferSuperadminRequest>
-                    for TransferSuperadminSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::TransferSuperadminRequest>
+                        for TransferSuperadminSvc<T>
+                    {
                         type Response = super::TransferSuperadminResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::TransferSuperadminRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::transfer_superadmin(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as OrganizationService>::transfer_superadmin(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -832,26 +660,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/IssueInvitation" => {
                     #[allow(non_camel_case_types)]
                     struct IssueInvitationSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::IssueInvitationRequest>
-                    for IssueInvitationSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::IssueInvitationRequest>
+                        for IssueInvitationSvc<T>
+                    {
                         type Response = super::IssueInvitationResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::IssueInvitationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::issue_invitation(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
+                                <T as OrganizationService>::issue_invitation(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -881,26 +702,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/ClaimInvitation" => {
                     #[allow(non_camel_case_types)]
                     struct ClaimInvitationSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::ClaimInvitationRequest>
-                    for ClaimInvitationSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::ClaimInvitationRequest>
+                        for ClaimInvitationSvc<T>
+                    {
                         type Response = super::ClaimInvitationResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ClaimInvitationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::claim_invitation(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
+                                <T as OrganizationService>::claim_invitation(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -930,26 +744,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/RevokeInvitation" => {
                     #[allow(non_camel_case_types)]
                     struct RevokeInvitationSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::RevokeInvitationRequest>
-                    for RevokeInvitationSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::RevokeInvitationRequest>
+                        for RevokeInvitationSvc<T>
+                    {
                         type Response = super::RevokeInvitationResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::RevokeInvitationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::revoke_invitation(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
+                                <T as OrganizationService>::revoke_invitation(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -979,23 +786,18 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/ForceJoin" => {
                     #[allow(non_camel_case_types)]
                     struct ForceJoinSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::ForceJoinRequest>
-                    for ForceJoinSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::ForceJoinRequest> for ForceJoinSvc<T>
+                    {
                         type Response = super::ForceJoinResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ForceJoinRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::force_join(&inner, request)
-                                    .await
+                                <T as OrganizationService>::force_join(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1025,26 +827,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/MarkOrganization" => {
                     #[allow(non_camel_case_types)]
                     struct MarkOrganizationSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::MarkOrganizationRequest>
-                    for MarkOrganizationSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::MarkOrganizationRequest>
+                        for MarkOrganizationSvc<T>
+                    {
                         type Response = super::MarkOrganizationResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::MarkOrganizationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::mark_organization(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
+                                <T as OrganizationService>::mark_organization(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1073,31 +868,23 @@ pub mod organization_service_server {
                 }
                 "/organization.v1.OrganizationService/GetPlatformOrganization" => {
                     #[allow(non_camel_case_types)]
-                    struct GetPlatformOrganizationSvc<T: OrganizationService>(
-                        pub Arc<T>,
-                    );
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::GetPlatformOrganizationRequest>
-                    for GetPlatformOrganizationSvc<T> {
+                    struct GetPlatformOrganizationSvc<T: OrganizationService>(pub Arc<T>);
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::GetPlatformOrganizationRequest>
+                        for GetPlatformOrganizationSvc<T>
+                    {
                         type Response = super::GetPlatformOrganizationResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::GetPlatformOrganizationRequest,
-                            >,
+                            request: tonic::Request<super::GetPlatformOrganizationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
                                 <T as OrganizationService>::get_platform_organization(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
+                                    &inner, request,
+                                )
+                                .await
                             };
                             Box::pin(fut)
                         }
@@ -1127,25 +914,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/ProvePlatformship" => {
                     #[allow(non_camel_case_types)]
                     struct ProvePlatformshipSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::ProvePlatformshipRequest>
-                    for ProvePlatformshipSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::ProvePlatformshipRequest>
+                        for ProvePlatformshipSvc<T>
+                    {
                         type Response = super::ProvePlatformshipResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::ProvePlatformshipRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::prove_platformship(
-                                        &inner,
-                                        request,
-                                    )
+                                <T as OrganizationService>::prove_platformship(&inner, request)
                                     .await
                             };
                             Box::pin(fut)
@@ -1176,23 +957,19 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/EvictMember" => {
                     #[allow(non_camel_case_types)]
                     struct EvictMemberSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::EvictMemberRequest>
-                    for EvictMemberSvc<T> {
+                    impl<T: OrganizationService>
+                        tonic::server::UnaryService<super::EvictMemberRequest>
+                        for EvictMemberSvc<T>
+                    {
                         type Response = super::EvictMemberResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::EvictMemberRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as OrganizationService>::evict_member(&inner, request)
-                                    .await
+                                <T as OrganizationService>::evict_member(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1222,14 +999,9 @@ pub mod organization_service_server {
                 "/organization.v1.OrganizationService/Leave" => {
                     #[allow(non_camel_case_types)]
                     struct LeaveSvc<T: OrganizationService>(pub Arc<T>);
-                    impl<
-                        T: OrganizationService,
-                    > tonic::server::UnaryService<super::LeaveRequest> for LeaveSvc<T> {
+                    impl<T: OrganizationService> tonic::server::UnaryService<super::LeaveRequest> for LeaveSvc<T> {
                         type Response = super::LeaveResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::LeaveRequest>,
@@ -1263,25 +1035,19 @@ pub mod organization_service_server {
                     };
                     Box::pin(fut)
                 }
-                _ => {
-                    Box::pin(async move {
-                        let mut response = http::Response::new(
-                            tonic::body::Body::default(),
-                        );
-                        let headers = response.headers_mut();
-                        headers
-                            .insert(
-                                tonic::Status::GRPC_STATUS,
-                                (tonic::Code::Unimplemented as i32).into(),
-                            );
-                        headers
-                            .insert(
-                                http::header::CONTENT_TYPE,
-                                tonic::metadata::GRPC_CONTENT_TYPE,
-                            );
-                        Ok(response)
-                    })
-                }
+                _ => Box::pin(async move {
+                    let mut response = http::Response::new(tonic::body::Body::default());
+                    let headers = response.headers_mut();
+                    headers.insert(
+                        tonic::Status::GRPC_STATUS,
+                        (tonic::Code::Unimplemented as i32).into(),
+                    );
+                    headers.insert(
+                        http::header::CONTENT_TYPE,
+                        tonic::metadata::GRPC_CONTENT_TYPE,
+                    );
+                    Ok(response)
+                }),
             }
         }
     }
